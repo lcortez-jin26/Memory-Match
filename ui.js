@@ -10,10 +10,17 @@ function render() {
   state.cards.forEach(function (card, index) {
     const button = document.createElement("button");
     button.className = "card";
+    button.type = "button";
     if (card.flipped || card.matched) {
       button.textContent = card.face;
+      button.classList.add("is-face-up");
+      if (card.matched) {
+        button.classList.add("is-matched");
+      }
+      button.setAttribute("aria-label", "Card " + (index + 1) + ": " + card.face);
     } else {
       button.textContent = CARD_BACK;
+      button.setAttribute("aria-label", "Card " + (index + 1) + ": face down");
     }
     button.addEventListener("click", function () {
       handleClick(index);

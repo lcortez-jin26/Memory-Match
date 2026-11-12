@@ -1,16 +1,82 @@
 /* style.css — owner: TABLE */
 
-body {
-  font-family: system-ui, sans-serif;
-  margin: 24px;
+html {
+  min-height: 100%;
+  background: radial-gradient(circle at top, #176584 0, #103c5a 45%, #08263e 100%);
 }
 
-/* TODO T1: Lay the cards out in a neat grid (4 across works for 16 cards),
-   and give them a look that fits your team's theme. */
+body {
+  font-family: system-ui, sans-serif;
+  box-sizing: border-box;
+  min-height: 100vh;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  color: #e9f9ff;
+}
+
+body,
+body * {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3rem);
+  letter-spacing: 0.04em;
+}
+
+#table {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 520px;
+  margin-top: 24px;
+}
 
 .card {
-  font-size: 2rem;
-  width: 80px;
-  height: 100px;
-  margin: 4px;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 2px solid #7cdbec;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #147ea3, #0b476e);
+  box-shadow: 0 6px 0 #062840, 0 10px 18px #031c3099;
+  color: #fff;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 #062840, 0 13px 20px #031c3099;
+}
+
+.card:focus-visible {
+  outline: 3px solid #ffe08a;
+  outline-offset: 4px;
+}
+
+.card.is-face-up {
+  background: #e9fbff;
+  border-color: #a8f0f3;
+  box-shadow: 0 6px 0 #76b9c8, 0 10px 18px #031c3066;
+}
+
+.card.is-matched {
+  background: #d5fff1;
+  border-color: #63dfb3;
+  box-shadow: 0 6px 0 #368e79, 0 10px 18px #031c3066;
+}
+
+@media (max-width: 400px) {
+  #table {
+    gap: 8px;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
 }
