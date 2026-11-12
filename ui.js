@@ -11,9 +11,13 @@ function render() {
     const button = document.createElement("button");
     button.className = "card";
     if (card.flipped || card.matched) {
-      button.textContent = card.face;
+      button.classList.add("card--face");
+      button.setAttribute("aria-label", card.face);
+      button.appendChild(createArt("card-art--" + getFaceArt(card.face)));
     } else {
-      button.textContent = CARD_BACK;
+      button.classList.add("card--back");
+      button.setAttribute("aria-label", "Face-down memory card");
+      button.appendChild(createArt("card-art--" + CARD_BACK));
     }
     button.addEventListener("click", function () {
       handleClick(index);
@@ -25,6 +29,13 @@ function render() {
   statusEl.textContent = "";
 
   // TODO T3: When isWon() is true, show a win message with the move count.
+}
+
+function createArt(artClass) {
+  const art = document.createElement("span");
+  art.className = "card-art " + artClass;
+  art.setAttribute("aria-hidden", "true");
+  return art;
 }
 
 function handleClick(index) {
