@@ -5,6 +5,38 @@ const tableEl = document.getElementById("table");
 const statusEl = document.getElementById("status");
 let audioContext = null;
 
+function addOceanLife() {
+  const oceanLife = document.createElement("div");
+  oceanLife.className = "ocean-life";
+  oceanLife.setAttribute("aria-hidden", "true");
+
+  const creatures = [
+    ["ocean-life__creature--fish-one", "🐠"],
+    ["ocean-life__creature--fish-two", "🐟"],
+    ["ocean-life__creature--school-one", "🐠"],
+    ["ocean-life__creature--school-two", "🐟"],
+    ["ocean-life__creature--school-three", "🐡"],
+    ["ocean-life__creature--school-four", "🐠"],
+    ["ocean-life__creature--school-five", "🐟"],
+    ["ocean-life__creature--shark", "🦈"],
+    ["ocean-life__creature--whale", "🐋"],
+    ["ocean-life__creature--dolphin", "🐬"],
+    ["ocean-life__creature--turtle", "🐢"],
+    ["ocean-life__creature--jellyfish", "🪼"],
+    ["ocean-life__creature--shell", "🐚"],
+    ["ocean-life__creature--coral", "🪸"]
+  ];
+
+  creatures.forEach(function (creature) {
+    const art = document.createElement("span");
+    art.className = "ocean-life__creature " + creature[0];
+    art.textContent = creature[1];
+    oceanLife.appendChild(art);
+  });
+
+  document.body.prepend(oceanLife);
+}
+
 function render() {
   tableEl.innerHTML = "";
 
@@ -94,5 +126,6 @@ function playTone(frequency, duration, delay) {
 // TODO T3: Add a "New game" button to index.html. When it's clicked,
 // call newGame(PAIRS) and then render().
 
+addOceanLife();
 newGame(PAIRS);
 render();
