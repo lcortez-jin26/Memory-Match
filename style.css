@@ -15,6 +15,7 @@ body {
 
 body > h1,
 body > p,
+body > #game-controls,
 body > #table {
   width: min(920px, calc(100% - 40px));
   margin-inline: auto;
@@ -41,6 +42,44 @@ h1 {
   color: #f6d496;
   font-size: clamp(.9rem, 1.8vw, 1.1rem);
   font-weight: 700;
+}
+
+#game-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-height: 44px;
+  text-align: center;
+}
+
+#win-message {
+  margin: 0;
+  color: #f6d496;
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+#new-game {
+  padding: 7px 14px;
+  border: 2px solid #f6d496;
+  border-radius: 8px;
+  background: #f6d496;
+  color: #092c3a;
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#new-game:hover {
+  background: #ffe4ae;
+}
+
+#new-game:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
 }
 
 #table {
