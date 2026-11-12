@@ -3,6 +3,9 @@
 
 const tableEl = document.getElementById("table");
 const statusEl = document.getElementById("status");
+const winMessageEl = document.getElementById("win-message");
+const newGameButtonEl = document.getElementById("new-game");
+let missTimeoutId = null;
 
 function render() {
   tableEl.innerHTML = "";
@@ -27,7 +30,11 @@ function render() {
 
   statusEl.textContent = "Moves: " + state.moves + " · Matches: " + state.matches + "/" + PAIRS;
 
-  // TODO T3: When isWon() is true, show a win message with the move count.
+  const won = isWon();
+  winMessageEl.textContent = won
+    ? "You found all " + PAIRS + " pairs in " + state.moves + " move" + (state.moves === 1 ? "" : "s") + "!"
+    : "";
+  winMessageEl.hidden = !won;
 }
 
 function createArt(artClass) {
@@ -41,15 +48,22 @@ function handleClick(index) {
   const result = pickCard(index);
   render();
   if (result === "miss") {
-    setTimeout(function () {
+    missTimeoutId = setTimeout(function () {
+      missTimeoutId = null;
       hideMiss();
       render();
     }, 800);
   }
 }
 
-// TODO T3: Add a "New game" button to index.html. When it's clicked,
-// call newGame(PAIRS) and then render().
+newGameButtonEl.addEventListener("click", function () {
+  if (missTimeoutId !== null) {
+    clearTimeout(missTimeoutId);
+    missTimeoutId = null;
+  }
+  newGame(PAIRS);
+  render();
+});
 
 newGame(PAIRS);
 render();
