@@ -26,9 +26,11 @@ function render() {
     tableEl.appendChild(button);
   });
 
-  statusEl.textContent = "Moves: " + state.moves + " · Matches: " + state.matches + "/" + PAIRS;
-
-  // TODO T3: When isWon() is true, show a win message with the move count.
+  if (isWon()) {
+    statusEl.textContent = "You won in " + state.moves + " moves!";
+  } else {
+    statusEl.textContent = "Moves: " + state.moves + " · Matches: " + state.matches + "/" + PAIRS;
+  }
 }
 
 function createArt(artClass) {

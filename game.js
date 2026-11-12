@@ -81,6 +81,11 @@ function hideMiss() {
 }
 
 function isWon() {
-  // TODO R3: Return true when every card on the table is matched.
-  return false;
+  for (const card of state.cards) {
+    if (!card.matched) {
+      return false;
+    }
+  }
+
+  return state.cards.length > 0;
 }
