@@ -12,15 +12,16 @@ function render() {
     button.className = "card";
     button.type = "button";
     if (card.flipped || card.matched) {
-      button.textContent = card.face;
-      button.classList.add("is-face-up");
+      button.classList.add("card--face");
       if (card.matched) {
         button.classList.add("is-matched");
       }
-      button.setAttribute("aria-label", "Card " + (index + 1) + ": " + card.face);
+      button.setAttribute("aria-label", "Card " + (index + 1) + ": " + getFaceArt(card.face).replace(/-/g, " ") + (card.matched ? ", matched" : ""));
+      button.appendChild(createArt("card-art--" + getFaceArt(card.face)));
     } else {
-      button.textContent = CARD_BACK;
+      button.classList.add("card--back");
       button.setAttribute("aria-label", "Card " + (index + 1) + ": face down");
+      button.appendChild(createArt("card-art--" + CARD_BACK));
     }
     button.addEventListener("click", function () {
       handleClick(index);
@@ -32,6 +33,13 @@ function render() {
   statusEl.textContent = "";
 
   // TODO T3: When isWon() is true, show a win message with the move count.
+}
+
+function createArt(artClass) {
+  const art = document.createElement("span");
+  art.className = "card-art " + artClass;
+  art.setAttribute("aria-hidden", "true");
+  return art;
 }
 
 function handleClick(index) {
