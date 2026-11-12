@@ -9,13 +9,36 @@ function newGame(pairs) {
     state.cards.push({ face: face, flipped: false, matched: false });
   }
 
-  // TODO R1: Shuffle state.cards so the pairs aren't next to each other.
+  shuffleCards(state.cards);
 
   state.firstPick = null;
   state.secondPick = null;
   state.moves = 0;
   state.matches = 0;
   state.locked = false;
+}
+
+function shuffleCards(cards) {
+  let shuffles = 0;
+  do {
+    for (let i = cards.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      const currentCard = cards[i];
+      cards[i] = cards[randomIndex];
+      cards[randomIndex] = currentCard;
+    }
+    shuffles++;
+  } while (cards.length > 2 && hasAdjacentPair(cards) && shuffles < 100);
+}
+
+function hasAdjacentPair(cards) {
+  for (let i = 0; i < cards.length - 1; i++) {
+    if (cards[i].face === cards[i + 1].face) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function pickCard(index) {
