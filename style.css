@@ -14,8 +14,7 @@ body {
 }
 
 body > h1,
-body > p,
-body > #table {
+body > p {
   width: min(920px, calc(100% - 40px));
   margin-inline: auto;
 }
@@ -47,8 +46,9 @@ h1 {
   --board-gap: clamp(6px, 1.3vw, 12px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  /* Leave a generous vertical buffer for all four rows and the page heading. */
-  width: min(calc(100vw - 32px), calc(60svh - 64px));
+  /* Four explicit, viewport-sized rows keep the entire deck on screen. */
+  width: fit-content;
+  margin-inline: auto;
   gap: var(--board-gap);
   padding: 4px 0 12px;
 }
@@ -56,6 +56,7 @@ h1 {
 .card {
   box-sizing: border-box;
   position: relative;
+  width: clamp(70px, 14svh, 128px);
   min-width: 0;
   aspect-ratio: .72;
   overflow: hidden;
@@ -143,10 +144,11 @@ h1 {
   }
 
   #table {
-    width: min(calc(100vw - 24px), calc(60svh - 32px));
+    width: fit-content;
   }
 
   .card {
+    width: clamp(56px, 10svh, 76px);
     border-width: 2px;
     border-radius: 11px;
   }
