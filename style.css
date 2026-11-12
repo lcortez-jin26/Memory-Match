@@ -44,13 +44,14 @@ h1 {
   --board-gap: clamp(6px, 1.3vw, 12px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  /* Four portrait cards plus three gaps fit in the visible viewport. */
-  width: min(calc(100vw - 32px), calc(72svh - 86px));
+  /* Leave a generous vertical buffer for all four rows and the page heading. */
+  width: min(calc(100vw - 32px), calc(60svh - 64px));
   gap: var(--board-gap);
   padding: 4px 0 12px;
 }
 
 .card {
+  box-sizing: border-box;
   position: relative;
   min-width: 0;
   aspect-ratio: .72;
@@ -139,7 +140,7 @@ h1 {
   }
 
   #table {
-    width: min(calc(100vw - 24px), calc(72svh - 42px));
+    width: min(calc(100vw - 24px), calc(60svh - 32px));
   }
 
   .card {
