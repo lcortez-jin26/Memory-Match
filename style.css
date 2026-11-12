@@ -1,42 +1,228 @@
 /* style.css — owner: TABLE */
 
 body {
-  min-height: 100vh;
+  box-sizing: border-box;
+  height: 100svh;
   margin: 0;
+  overflow: hidden;
   color: #f8efe1;
   font-family: Georgia, "Times New Roman", serif;
   background:
+    radial-gradient(ellipse at 50% 108%, rgba(15, 111, 121, .55) 0 16%, transparent 17%),
+    repeating-radial-gradient(ellipse at 50% 110%, transparent 0 50px, rgba(83, 190, 190, .08) 51px 54px),
     radial-gradient(circle at 18% 12%, rgba(255, 198, 118, .18), transparent 24rem),
     radial-gradient(circle at 92% 88%, rgba(31, 150, 171, .26), transparent 28rem),
     #092c3a;
 }
 
 body > h1,
-body > p,
-body > #table {
+body > p {
   width: min(920px, calc(100% - 40px));
   margin-inline: auto;
 }
 
+body > h1,
+body > p,
+body > #table {
+  position: relative;
+  z-index: 1;
+}
+
 h1 {
-  margin-top: 0;
-  padding-top: 34px;
-  letter-spacing: .08em;
+  margin: 0;
+  padding: 14px 0 4px;
+  color: #f8e7bd;
+  font-family: Copperplate, Papyrus, "Trebuchet MS", fantasy;
+  font-weight: 800;
+  letter-spacing: .12em;
   text-align: center;
   text-transform: uppercase;
-  font-size: clamp(2rem, 5vw, 3.6rem);
-  text-shadow: 0 3px 18px rgba(0, 0, 0, .35);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  text-shadow: 0 3px 0 #1b6675, 0 9px 22px rgba(0, 0, 0, .42);
+}
+
+.ocean-life {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ocean-life__creature {
+  position: absolute;
+  display: block;
+  opacity: .42;
+  filter: saturate(.85) drop-shadow(0 10px 14px rgba(0, 14, 24, .3));
+  font-family: system-ui, sans-serif;
+  line-height: 1;
+}
+
+.ocean-life__creature--fish-one {
+  top: 19%;
+  left: 7%;
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  transform: scaleX(-1) rotate(-12deg);
+  animation: drift-right 10s ease-in-out infinite alternate;
+}
+
+.ocean-life__creature--fish-two {
+  top: 63%;
+  right: 7%;
+  font-size: clamp(1.7rem, 3vw, 3.4rem);
+  transform: rotate(8deg);
+  animation: drift-left 12s ease-in-out infinite alternate;
+}
+
+.ocean-life__creature--school-one {
+  top: 31%;
+  left: 3%;
+  font-size: clamp(1.1rem, 2vw, 2rem);
+  transform: scaleX(-1) rotate(8deg);
+  animation: swim-right 7s ease-in-out infinite alternate;
+}
+
+.ocean-life__creature--school-two {
+  top: 72%;
+  left: 8%;
+  font-size: clamp(1rem, 1.7vw, 1.7rem);
+  transform: scaleX(-1) rotate(-6deg);
+  animation: swim-left 9s ease-in-out infinite alternate 1s;
+}
+
+.ocean-life__creature--school-three {
+  top: 80%;
+  right: 5%;
+  font-size: clamp(1.1rem, 2vw, 2rem);
+  animation: swim-left 10s ease-in-out infinite alternate 3s;
+}
+
+.ocean-life__creature--school-four {
+  top: 37%;
+  right: 4%;
+  font-size: clamp(1rem, 1.8vw, 1.8rem);
+  transform: rotate(-10deg);
+  animation: swim-left 8s ease-in-out infinite alternate 2s;
+}
+
+.ocean-life__creature--school-five {
+  top: 53%;
+  right: 14%;
+  font-size: clamp(.9rem, 1.5vw, 1.5rem);
+  transform: rotate(10deg);
+  animation: swim-left 11s ease-in-out infinite alternate 5s;
+}
+
+/* These native sea-creature glyphs face left, matching their swim-left path. */
+.ocean-life__creature--shark {
+  top: 27%;
+  right: 8%;
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  transform: rotate(-8deg);
+  animation: swim-left 19s ease-in-out infinite alternate 1s;
+}
+
+.ocean-life__creature--whale {
+  top: 73%;
+  left: 4%;
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  transform: rotate(7deg);
+  animation: swim-left 24s ease-in-out infinite alternate 4s;
+}
+
+.ocean-life__creature--dolphin {
+  top: 48%;
+  left: 5%;
+  font-size: clamp(2.2rem, 4.2vw, 4.6rem);
+  transform: scaleX(-1) rotate(-10deg);
+  animation: swim-right 17s ease-in-out infinite alternate 2s;
+}
+
+.ocean-life__creature--turtle {
+  top: 43%;
+  left: 12%;
+  font-size: clamp(2rem, 3.8vw, 4rem);
+  transform: rotate(-22deg);
+  animation: drift-right 18s ease-in-out infinite alternate-reverse;
+}
+
+.ocean-life__creature--jellyfish {
+  top: 15%;
+  right: 11%;
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
+  animation: bob 6s ease-in-out infinite alternate;
+}
+
+.ocean-life__creature--shell {
+  right: 17%;
+  bottom: 8%;
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  transform: rotate(-15deg);
+}
+
+.ocean-life__creature--coral {
+  left: 16%;
+  bottom: -1%;
+  font-size: clamp(2.5rem, 5vw, 5.4rem);
+  transform: rotate(12deg);
+}
+
+@keyframes drift-right {
+  to { translate: 28px -10px; }
+}
+
+@keyframes drift-left {
+  to { translate: -34px 14px; }
+}
+
+@keyframes bob {
+  to { translate: 0 20px; rotate: 7deg; }
+}
+
+@keyframes swim-right {
+  0% { translate: -18px 0; }
+  50% { translate: 10px -12px; }
+  100% { translate: 34px 5px; }
+}
+
+@keyframes swim-left {
+  0% { translate: 18px 0; }
+  50% { translate: -10px 12px; }
+  100% { translate: -34px -5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ocean-life__creature { animation: none; }
+}
+
+#status:empty {
+  visibility: hidden;
+}
+
+#status {
+  min-height: 1.2em;
+  margin-block: 0;
+  text-align: center;
+  color: #f6d496;
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  font-weight: 700;
 }
 
 #table {
+  --board-gap: clamp(6px, 1.3vw, 12px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(10px, 2vw, 18px);
-  padding: 20px 0 44px;
+  /* Four explicit, viewport-sized rows keep the entire deck on screen. */
+  width: fit-content;
+  margin-inline: auto;
+  gap: var(--board-gap);
+  padding: 4px 0 12px;
 }
 
 .card {
+  box-sizing: border-box;
   position: relative;
+  width: clamp(70px, 14svh, 128px);
   min-width: 0;
   aspect-ratio: .72;
   overflow: hidden;
@@ -127,6 +313,36 @@ h1 {
 .card-art--whale { --creature: "🐳"; --sea: radial-gradient(circle at 77% 24%, #f5cf72 0 7%, transparent 8%), linear-gradient(155deg, #034b74, #177a9a 60%, #efb968 61%); --tilt: -6deg; }
 .card-art--turtle { --creature: "🐢"; --sea: radial-gradient(circle at 25% 82%, #ec9462 0 15%, transparent 16%), linear-gradient(150deg, #9ecb83, #47a497 52%, #13617b 53%); --tilt: 8deg; }
 
-@media (max-width: 520px) {
-  #table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-height: 620px) {
+  h1 {
+    padding-top: 6px;
+    font-size: 1.35rem;
+  }
+
+  #table {
+    width: fit-content;
+  }
+
+  .card {
+    width: clamp(56px, 10svh, 76px);
+    border-width: 2px;
+    border-radius: 11px;
+  }
+}
+
+@media (max-width: 760px) {
+  .ocean-life__creature--turtle,
+  .ocean-life__creature--jellyfish,
+  .ocean-life__creature--shell,
+  .ocean-life__creature--coral,
+  .ocean-life__creature--shark,
+  .ocean-life__creature--whale,
+  .ocean-life__creature--dolphin,
+  .ocean-life__creature--school-one,
+  .ocean-life__creature--school-two,
+  .ocean-life__creature--school-three,
+  .ocean-life__creature--school-four,
+  .ocean-life__creature--school-five {
+    display: none;
+  }
 }
